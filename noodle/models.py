@@ -19,7 +19,7 @@ class User(db.Model):
         self.email = email
 
     def __repr__(self):
-        return '<User {id=%d,username=%r}>' % (self.id, self.username)
+        return '<User {username=%r}>' % self.username
 
 
 class Event(db.Model):
@@ -34,7 +34,7 @@ class Event(db.Model):
         self.created_at = datetime.utcnow()
 
     def __repr__(self):
-        return '<Event {id=%d,title=%r}>' % (self.id, self.title)
+        return '<Event {title=%r}>' % self.title
 
 class Time(db.Model):
     __tablename__ = 'times'
@@ -46,7 +46,7 @@ class Time(db.Model):
         self.time = time
 
     def __repr__(self):
-        return '<Time {id=%d,time=%r}>' % (self.id, self.time)
+        return '<Time {time=%r}>' % self.time
 
 class Check(db.Model):
     __tablename__ = 'checks'
@@ -55,4 +55,4 @@ class Check(db.Model):
     time_id = db.Column(db.Integer, db.ForeignKey('times.id'))
 
     def __repr__(self):
-        return '<Check {id=%d}>' % self.id
+        return '<Check>'
