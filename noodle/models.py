@@ -31,7 +31,7 @@ class Event(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(80))
     created_at = db.Column(db.DateTime)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     user = db.relationship('User', backref=db.backref('events', lazy='dynamic'))
 
     def __init__(self, title):
@@ -45,7 +45,7 @@ class Time(db.Model):
     __tablename__ = 'times'
     id = db.Column(db.Integer, primary_key=True)
     time = db.Column(db.DateTime)
-    event_id = db.Column(db.Integer, db.ForeignKey('events.id'))
+    event_id = db.Column(db.Integer, db.ForeignKey('events.id'), nullable=False)
     event = db.relationship('Event', backref=db.backref('times', lazy='dynamic'))
 
     def __init__(self, time):
@@ -57,9 +57,9 @@ class Time(db.Model):
 class Check(db.Model):
     __tablename__ = 'checks'
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     user = db.relationship('User', backref=db.backref('checks', lazy='dynamic'))
-    time_id = db.Column(db.Integer, db.ForeignKey('times.id'))
+    time_id = db.Column(db.Integer, db.ForeignKey('times.id'), nullable=False)
     time = db.relationship('Time', backref=db.backref('checks', lazy='dynamic'))
 
     def __repr__(self):
