@@ -1,7 +1,21 @@
-from flask import Flask
+from flask import Flask, request
 app = Flask(__name__)
 
-import noodle.models
+from noodle.models import User, Event, Time, Check, db
+
+@app.route('/user', methods=['POST'])
+def create_user():
+    try:
+        new_user = User(request.form['username'], request.form['email'])
+        db.session.add(new_user)
+        db.session.commit()
+        return 'OK!'
+    except:
+        return ':('
+
+@app.route('/user', methods=['GET'])
+def list_users():
+    return '\n'.join(map(str, User.query.all()))
 
 @app.route('/')
 def hello():
