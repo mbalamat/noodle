@@ -1,5 +1,6 @@
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 import os
 
 from noodle.app import app
@@ -7,6 +8,7 @@ from noodle.app import app
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('NOODLE_DATABASE_URI', 'sqlite:///test.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 # TODO: make all foreign keys not null
 
