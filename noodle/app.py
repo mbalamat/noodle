@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 app = Flask(__name__)
 
 from noodle.models import User, Event, Time, Check, db
@@ -18,5 +18,5 @@ def list_users():
     return '\n'.join(map(str, User.query.all()))
 
 @app.route('/')
-def hello():
-    return 'Hello !'
+def index():
+    return render_template('index.html')
