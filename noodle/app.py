@@ -1,7 +1,12 @@
 from flask import Flask, request, render_template
+import json
 app = Flask(__name__)
 
 from noodle.models import User, Event, Time, Check, db
+
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 @app.route('/user', methods=['POST'])
 def create_user():
@@ -17,10 +22,10 @@ def create_user():
 def list_users():
     return '\n'.join(map(str, User.query.all()))
 
-@app.route('/')
-def index():
-    return render_template('index.html')
-
-@app.route('/events')
+@app.route('/events', methods=['GET'])
 def events():
     return render_template('events.html')
+
+@app.route('/events', methods=['POST'])
+def events_in_json():
+    return ':)'
