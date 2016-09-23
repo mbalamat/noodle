@@ -26,6 +26,10 @@ def list_users():
 def events():
     return render_template('events.html')
 
+@app.route('/start', methods=['GET'])
+def start():
+    return render_template('start.html')
+
 @app.route('/events', methods=['POST'])
 def events_in_json():
     return ':)'

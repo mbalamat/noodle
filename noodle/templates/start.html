@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block content %}
+<h1> Start a new Noodle here! </h1>
+<p>Fill the form bellow to get started.</p>
+    <br/>
+    <br/>
+    <form>
+        <div id="first">
+            <div class="form-group row">
+                <label for="Title" class="col-sm-2 col-form-label">Title</label>
+                <div class="col-sm-10">
+                    <input type="text" name="title" class="form-control" id="title" placeholder="Enter Noodle's Title here.">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="Location" class="col-sm-2 col-form-label">Location</label>
+                <div class="col-sm-10">
+                    <input type="text" name="location" class="form-control" id="location" placeholder="Location (optional)">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="Description" class="col-sm-2 col-form-label">Description</label>
+                <div class="col-sm-10">
+                    <input type="text" name="description" class="form-control" id="description" placeholder="Description">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="Name" class="col-sm-2 col-form-label">Name</label>
+                <div class="col-sm-10">
+                    <input type="text" name="name" class="form-control" id="name" placeholder="e.g. George Papadakis">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="Email" class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-10">
+                    <input type="text" name="email" class="form-control" id="email" placeholder="g.papadakis@antena.gr">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Next</button>
+        </div>
+        <div id="second">
+           <h3>Please select the dates you want to set up a meeting.</h3>
+            <br/>
+            <div class="form-group">
+                <div class='input-group date' id='datetimepicker1'>
+                    <input type='text' class="form-control" style="display:none;"/>
+                </div>
+            </div>
+            <div class="row">
+                <button type="button" class="btn btn-secondary">Back</button>
+                <button type="button" class="btn btn-primary">Next</button>
+            </div>
+        </div>
+        <div id="third">
+           <h3>Please select the time proposals for the meeting.</h3>
+            <br/>
+            <div class="row">
+                <div id="timedates">
+                </div>
+            </div>
+            <div class="row">
+                <button type="button" class="btn btn-secondary">Back</button>
+                <button type="button" class="btn btn-primary">Next</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
