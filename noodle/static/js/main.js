@@ -49,6 +49,22 @@ $(document).ready(function() {
     });
 });
 
+function showNext(n){
+    if (n == 1) {
+        $('#second').hide(1000);
+        $('#first').show(1000);
+    }
+    if (n == 2) {
+        $('#first').hide(1000);
+        $('#second').show(1000);
+        $('#third').hide(1000);
+    }
+    if (n == 3) {
+        $('#second').hide(1000);
+        $('#third').show(1000);
+    }
+    return false;
+}
 function loadEvents(){
     console.log('Loading Events . . .');
 }
