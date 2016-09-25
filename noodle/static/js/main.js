@@ -42,7 +42,7 @@ $(document).ready(function() {
                         <option>23</option> \
                         <option>24</option> \
                         </select>';
-                    selectedDatesHTML += '<li class="list-group-item">' + ddmmyyyy + timeSelector  + "</li>";
+                    selectedDatesHTML += '<li class="list-group-item">' + '<div id="time">' + '<div id="date">' + ddmmyyyy + '</div>' + timeSelector + '</div>' + "</li>";
                 }
                 document.getElementById("timedates").innerHTML = selectedDatesHTML;
             }
@@ -65,6 +65,21 @@ function showNext(n){
     }
     return false;
 }
+
+function getSelectedDates(){ 
+    var datesToSend = [];
+    var times = document.querySelectorAll('#time');
+    for (i = 0; i < times.length; i++){
+        var date_tmp = times[i].childNodes[0].innerHTML.toString().split("/");
+        var times_tmp = $(times[i].childNodes[1]).val();
+        for (j = 0; i < times_tmp.length; j++){
+            var date_obj = new Date(date_tmp[2], (date_tmp[1]-1), date_tmp[0], times_tmp[j], 0, 0);
+            datesToSend.push(date_obj);
+        }
+    }
+    return datesToSend;
+}
+
 function loadEvents(){
     console.log('Loading Events . . .');
 }
