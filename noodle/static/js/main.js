@@ -69,15 +69,22 @@ function showNext(n){
 function getSelectedDates(){ 
     var datesToSend = [];
     var times = document.querySelectorAll('#time');
+    console.log('times', times);
     for (i = 0; i < times.length; i++){
         var date_tmp = times[i].childNodes[0].innerHTML.toString().split("/");
         var times_tmp = $(times[i].childNodes[1]).val();
-        for (j = 0; i < times_tmp.length; j++){
+        for (j = 0; j < times_tmp.length; j++){
             var date_obj = new Date(date_tmp[2], (date_tmp[1]-1), date_tmp[0], times_tmp[j], 0, 0);
             datesToSend.push(date_obj);
         }
     }
     return datesToSend;
+}
+
+function loadEvent(){
+    console.log('Loading Event!');
+    //mock data
+    var event_date_tmp = {id:1, date:"25/9/2016", time:"15:00"};
 }
 
 function loadEvents(){
