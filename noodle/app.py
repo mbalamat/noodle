@@ -33,3 +33,7 @@ def start():
 @app.route('/events', methods=['POST'])
 def events_in_json():
     return ':)'
+
+@app.route('/event', methods=['GET'])
+def event():
+    return render_template('event.html')

@@ -69,7 +69,6 @@ function showNext(n){
 function getSelectedDates(){ 
     var datesToSend = [];
     var times = document.querySelectorAll('#time');
-    console.log('times', times);
     for (i = 0; i < times.length; i++){
         var date_tmp = times[i].childNodes[0].innerHTML.toString().split("/");
         var times_tmp = $(times[i].childNodes[1]).val();
@@ -81,12 +80,118 @@ function getSelectedDates(){
     return datesToSend;
 }
 
-function loadEvent(){
-    console.log('Loading Event!');
-    //mock data
-    var event_date_tmp = {id:1, date:"25/9/2016", time:"15:00"};
+function loadTimesForEvent(eventId, cb) {
+    // /times/
+    var ret = {
+        'times': [
+            {
+                'id': 1,
+                'date': '25/9/2016',
+                'time': '15:00'
+            },
+            {
+                'id': 2,
+                'date': '26/9/2016',
+                'time': '17:00'
+            },
+            {
+                'id': 3,
+                'date': '26/9/2016',
+                'time': '18:00'
+            }
+        ]
+    };
+    cb(ret.times);
 }
 
-function loadEvents(){
-    console.log('Loading Events . . .');
+function loadChecksForEvent(eventId, cb) {
+    // /checks/
+    var ret = {
+        'checks': [
+            {
+                'id': 1,
+                'user_id': 1,
+                'time_id': 1
+            },
+            {
+                'id': 2,
+                'user_id': 2,
+                'time_id': 3 
+            },
+            {
+                'id': 3,
+                'user_id': 2,
+                'time_id': 2
+            }
+        ]
+    };
+    cb(ret.checks);
+}
+
+function loadUsersForEvent(eventId, cb) {
+    // /users
+    var ret = {
+        'users': [
+            {
+                'id': 1,
+                'username': 'mbalamat',
+            },
+            {
+                'id': 2,
+                'username': 'gtklocker',
+            },
+            {
+                'id': 3,
+                'username': 'jpanagos',
+            }
+        ]
+    };
+    cb(ret.users);
+}
+
+function makeTable(){
+    loadTimesForEvent(1, function(times) {
+        document.getElementById("thead").innerHTML = "";
+        document.getElementById("newUser").innerHTML = "";
+        var theadHTML = "<th>Participants</th>";
+        var newUserHTML = '<td><input type="text" class="form-control" id="newUser" placeholder="Name" style="width: 60%; height: 70%;"></td>';
+        for (var i = 0; i < times.length; i++){
+            theadHTML += "<th>" + times[i].date + "<br/>" + times[i].time + "</th>";
+            newUserHTML += '<td><input type="checkbox" class="custom-control-input"></td>';
+        }
+        document.getElementById("thead").innerHTML = theadHTML;
+
+        loadUsersForEvent(1, function(users) {
+            loadChecksForEvent(1, function(checks) {
+                users.forEach(function(user) {
+                    var checkHTML = function(isChecked) {
+                        return "<td><input type='checkbox' disabled " + ((isChecked) ? "checked" : "") + "/></td>";
+                    };
+                    var allChecksHTML = "";
+                    
+                    times.forEach(function(time) {
+                        var match = false;
+                        checks.forEach(function(check) {
+                            if (check.user_id == user.id && time.id == check.time_id) {
+                                allChecksHTML += checkHTML(true);
+                                match = true;
+                            }
+                        });
+                        if (!match) {
+                            allChecksHTML += checkHTML(false);
+                        }
+                    });
+                    
+                    var rowHTML = " \
+                        <tr> \
+                            <td>" + user.username + "</td> \
+                            " + allChecksHTML + " \
+                        </tr> \
+                    ";
+                    $("tbody#existingUsers").prepend($(rowHTML));
+                });
+            });
+        });
+    });
+    
 }

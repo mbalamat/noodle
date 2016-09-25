@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<h1> This is a mock event! </h1>
+<button onclick="makeTable()" type="button" class="btn btn-primary btn-lg btn-block">Load Event</button>
+<div id="table">
+    <table class="table">
+        <thead>
+            <tr id="thead">
+            </tr>
+        </thead>
+        <tbody id='existingUsers'>
+            <tr>
+                <td>
+                    <input type="text" class="form-control" id="newUser" placeholder="Name" style="width: 60%; height: 70%;">
+                </td>
+                <td>
+                    <input type="checkbox" class="custom-control-input">
+                </td>
+                <td>
+                    <input type="checkbox" class="custom-control-input">
+                </td>
+                <td>
+                <input type="checkbox" class="custom-control-input">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div
+{% endblock %}
