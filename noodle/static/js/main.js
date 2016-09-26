@@ -17,6 +17,7 @@ $(document).ready(function() {
                 for (i = 0; i < dates_selected.length; i++) {
                     var ddmmyyyy = dates_selected[i].getDate() + "/" + (dates_selected[i].getMonth() + 1) + "/" + dates_selected[i].getFullYear();
                     var timeSelector = '<select multiple class="form-control" id="sel2" style="margin-left:7em; width: 30%;"> \
+                        <option>0</option> \
                         <option>1</option> \
                         <option>2</option> \
                         <option>3</option> \
@@ -40,7 +41,6 @@ $(document).ready(function() {
                         <option>21</option> \
                         <option>22</option> \
                         <option>23</option> \
-                        <option>24</option> \
                         </select>';
                     selectedDatesHTML += '<li class="list-group-item">' + '<div id="time">' + '<div id="date">' + ddmmyyyy + '</div>' + timeSelector + '</div>' + "</li>";
                 }
@@ -193,5 +193,19 @@ function makeTable(){
             });
         });
     });
-    
+}
+
+function setDateTimes() {
+    var datetimes = getSelectedDates();
+    console.log(datetimes);
+    var date_value = "";
+    for (var i = 0; i < (datetimes.length - 1); i++) {
+       date_value += datetimes[i] + "," ;
+    }
+    date_value += datetimes[datetimes.length - 1];
+    console.log(date_value);
+    document.getElementById("datetimes").value = date_value;
+    $("#confirm_button").hide(1000);
+    $("#submit_button").show(1000);
+    return false;
 }

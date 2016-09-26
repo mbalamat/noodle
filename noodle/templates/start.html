@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <h1> Start a new Noodle here! </h1>
-    <form>
+    <form action="create" method="post">
         <div id="first" style="display:inline">
             <p>Fill out the form bellow to get started.</p>
             <br/>
@@ -13,21 +13,9 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label for="Location" class="col-sm-2 col-form-label">Location</label>
-                <div class="col-sm-10">
-                    <input type="text" name="location" class="form-control" id="location" placeholder="Location (optional)">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="Description" class="col-sm-2 col-form-label">Description</label>
-                <div class="col-sm-10">
-                    <input type="text" name="description" class="form-control" id="description" placeholder="Description">
-                </div>
-            </div>
-            <div class="form-group row">
                 <label for="Name" class="col-sm-2 col-form-label">Name</label>
                 <div class="col-sm-10">
-                    <input type="text" name="name" class="form-control" id="name" placeholder="e.g. George Papadakis">
+                    <input type="text" name="name" class="form-control" id="name" placeholder="e.g. George Papadakis, gpapadakis">
                 </div>
             </div>
             <div class="form-group row">
@@ -62,7 +50,17 @@
             </div>
             <div class="row">
                 <button type="button" class="btn btn-secondary" onclick="return showNext(2)">Back</button>
-                <button type="button" class="btn btn-primary">Next</button>
+            <div class="form-group">
+                <div class='input-group date'>
+                    <input name="datetimes" type='text' class="form-control" id="datetimes" style="display:none;"/>
+                </div>
+            </div>
+                <div id="confirm_button">
+                <button type="input" onclick="return setDateTimes()" class="btn btn-primary">Confirm</button>
+                </div>
+                <div id="submit_button" style="display: none;">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
             </div>
         </div>
     </form>

@@ -7,7 +7,7 @@ from noodle.models import User, Event, Time, Check, db
 @app.route('/')
 def index():
     return render_template('index.html')
-
+'''
 @app.route('/user', methods=['POST'])
 def create_user():
     try:
@@ -17,7 +17,7 @@ def create_user():
         return 'OK!'
     except:
         return ':('
-
+'''
 @app.route('/user', methods=['GET'])
 def list_users():
     return '\n'.join(map(str, User.query.all()))
@@ -37,3 +37,23 @@ def events_in_json():
 @app.route('/event', methods=['GET'])
 def event():
     return render_template('event.html')
+
+@app.route('/create', methods=['POST'])
+def create_event():
+    data_dict = request.form.to_dict()
+    datetimes = data_dict["datetimes"].split(",")
+    email = data_dict["email"]
+    title = data_dict["title"]
+    name = data_dict["name"]
+    try:
+        new_user = User(name, email)
+        db.session.add(new_user)
+        new_event = Event(title)
+        db.session.add(new_event)
+        for time in datetimes:
+            new_times = Time(time)
+            db.session.add(new_times)
+        db.session.commit()
+    except:
+        return ':('
+    return ':)'
